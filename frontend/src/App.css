@@ -1,0 +1,17 @@
+
+.main-container {
+  background-image: url("potato.jpg");
+    background-size: 100%;
+    /*opacity: 0.1;*/
+
+}
+.text {
+    font-size: 64px;
+    color: #efefef;
+    font-family: Lucida Console, Courier, monospace;
+
+}
+
+.forms {
+    margin: 40px;
+}
