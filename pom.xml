@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.blockTeam4Boys</groupId>
-    <artifactId>FromGroundToTable</artifactId>
+    <artifactId>fromGroundToTable</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
 
-    <name>potatoTracker</name>
+    <name>fromGroundToTable</name>
     <description>Demo project for food tracking</description>
 
     <parent>
@@ -44,12 +44,12 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
 
             <!--<plugin>-->
                 <!--<groupId>com.github.eirslett</groupId>-->
@@ -109,6 +109,6 @@
                     <!--</execution>-->
                 <!--</executions>-->
             <!--</plugin>-->
-        </plugins>
-    </build>
+        <!--</plugins>-->
+    <!--</build>-->
 </project>

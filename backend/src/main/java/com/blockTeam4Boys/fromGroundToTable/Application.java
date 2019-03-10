@@ -1,6 +1,6 @@
-package com.blockTeam4Boys.potatoTracker;
+package com.blockTeam4Boys.fromGroundToTable;
 
-import com.blockTeam4Boys.potatoTracker.ethereum.FoodTrackerService;
+import com.blockTeam4Boys.fromGroundToTable.ethereum.FoodTrackerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

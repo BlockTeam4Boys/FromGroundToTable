@@ -1,6 +1,5 @@
-package com.blockTeam4Boys.potatoTracker.ethereum;
+package com.blockTeam4Boys.fromGroundToTable.ethereum;
 
-import org.springframework.stereotype.Service;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;

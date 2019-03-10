@@ -1,10 +1,8 @@
-package com.blockTeam4Boys.potatoTracker.controllers;
+package com.blockTeam4Boys.fromGroundToTable.controllers;
 
-import com.blockTeam4Boys.potatoTracker.ethereum.FoodTrackerService;
+import com.blockTeam4Boys.fromGroundToTable.ethereum.FoodTrackerService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
