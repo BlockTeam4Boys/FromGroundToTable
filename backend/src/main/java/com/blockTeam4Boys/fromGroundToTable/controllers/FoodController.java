@@ -21,6 +21,7 @@ public class FoodController {
     @CrossOrigin
     @RequestMapping(value = "/addPotato", method = RequestMethod.POST)
     public void addPotato(@RequestParam("id") int id, @RequestParam("name") String name) throws Exception {
+        System.out.println("Hello");
         foodTrackerService.addPotato(id, name);
     }
 

@@ -1,17 +1,7 @@
-
-.main-container {
-  background-image: url("potato.jpg");
-    background-size: 100%;
-    /*opacity: 0.1;*/
-
-}
-.text {
-    font-size: 64px;
-    color: #efefef;
-    font-family: Lucida Console, Courier, monospace;
-
-}
-
-.forms {
-    margin: 40px;
+#components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255,255,255,.2);
+    margin: 16px 24px 16px 0;
+    float: left;
 }
