@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
 	public static void main(String[] args) throws Exception {
-		FoodTrackerService.deployContract();
+//		FoodTrackerService.deployContract();
 		SpringApplication.run(Application.class, args);
 	}
 }

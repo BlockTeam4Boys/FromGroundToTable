@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "antd": "^3.15.0",
+    "js-cookie": "^2.2.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-router": "latest",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -24,5 +27,4 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:8080"
-
 }

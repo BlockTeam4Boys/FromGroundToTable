@@ -7,7 +7,6 @@ import { notification } from 'antd';
 
 class FormAdd extends React.Component {
 
-
     handleSubmit = (e) => {
         e.preventDefault();
 

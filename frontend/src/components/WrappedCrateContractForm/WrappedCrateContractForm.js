@@ -6,7 +6,7 @@ import Input from "antd/es/input";
 import Icon from "antd/es/icon";
 const {RangePicker } = DatePicker;
 
-class TimeRelatedForm extends React.Component {
+class CrateContractForm extends React.Component {
     render() {
         const options = [{
             value: 'зерновые',
@@ -46,23 +46,32 @@ class TimeRelatedForm extends React.Component {
                 <Form layout={this.props.formLayout}>
 
                     <Form.Item
-                    label="С кем заключается сделка"
-                    >
-                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="id" />
+                    label="С кем заключается сделка">
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Имя" />
                     </Form.Item>
                 <Form.Item
-                    label="Дата начала и конца"
-                ><RangePicker />
+                    label="Дата начала и конца">
+                    <RangePicker/>
                 </Form.Item>
                     <div>
                         <span>Тип продукции  </span>
-                        <Cascader style={{ width : '30vw', marginTop: "8px" }}
-                                  options={options} placeholder="Укажите тип продукции" />
+                        {/*<Cascader style={{ width : '30vw', marginTop: "8px" }}*/}
+                                  {/*options={options}*/}
+                                  {/*placeholder="Укажите тип продукции" />*/}
+                        <Input
+                            prefix={<Icon type="inbox" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Тип продукции" />
                     </div>
 
-                <Form.Item style={{marginTop: "16px" }}
-                >
-                    <Button type="primary" htmlType="submit">Готово</Button>
+                <Form.Item
+                    style={{marginTop: "16px" }}>
+                    <Button
+                        type="primary"
+                        htmlType="submit">
+                        Готово
+                    </Button>
                 </Form.Item>
             </Form>
             </div>
@@ -70,6 +79,6 @@ class TimeRelatedForm extends React.Component {
     }
 }
 
-const WrappedTimeRelatedForm = Form.create({ name: 'time_related_controls' })(TimeRelatedForm);
+const WrappedCrateContractForm = Form.create({ name: 'time_related_controls' })(CrateContractForm);
 
-export default WrappedTimeRelatedForm;
+export default WrappedCrateContractForm;
