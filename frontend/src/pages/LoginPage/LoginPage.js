@@ -14,8 +14,9 @@ class LoginPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    onSuccessLogin() {
+    onSuccessLogin(name) {
         Cookies.set("role", "user", {expires: 30});
+        Cookies.set("name", name, {expires: 30});
         this.props.history.push("/");
     }
 

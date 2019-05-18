@@ -1,73 +1,124 @@
 import {Form, DatePicker, Button} from 'antd';
 import "antd/dist/antd.css";
-import { Cascader } from 'antd';
 import * as React from "react";
-import Input from "antd/es/input";
-import Icon from "antd/es/icon";
+import { Select } from 'antd';
+import { message } from 'antd';
+import {createTransfers} from "../../services/customerService";
+import InputNumber from "antd/es/input-number";
 const {RangePicker } = DatePicker;
+const Option = Select.Option;
 
 class CrateContractForm extends React.Component {
-    render() {
-        const options = [{
-            value: 'зерновые',
-            label: 'зерновые',
-        },
-            {
-                value: 'корнеплоды',
-                label: 'корнеплоды',
-                children: [{
-                    value: 'морковь',
-                    label: 'морковь',
 
-                },
-                    {value: 'свекла',
-                        label: 'свекла',},
-                    {value: 'редис',
-                        label: 'редис',}
-                ],
-
-            },
-            {
-            value: 'бобовые',
-            label: 'бобовые',
-
-        }, {
-            value: 'кормовые',
-            label: 'кормовые',
-
-        },
-        ];
+    constructor(props) {
+        super(props);
         this.state = {
-            formLayout: 'horizontal',
+            name: '',
+            weight: 1,
+            type: '',
+            startDate: '',
+            endDate: '',
         };
+        this.onChangeWeight = this.onChangeWeight.bind(this);
+        this.onChangeSecondPlayer = this.onChangeSecondPlayer.bind(this);
+        this.onChangeProductionType = this.onChangeProductionType.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onClick = this.onClick.bind(this);
 
+    }
+    customers = [];
+    products = [];
+
+    onChangeWeight(value) {
+        this.setState({weight : value});
+        console.log(this.state.weight)
+    }
+    onChangeProductionType(value) {
+        this.setState({type : value});
+    }
+    onChangeSecondPlayer(value) {
+        this.setState({name : value});
+    }
+    onChangeDate(date, dateString) {
+        this.setState({startDate : dateString[0]});
+        this.setState({endDate : dateString[1]});
+    }
+    onClick() {
+        createTransfers(
+            this.state.name,
+            this.state.weight,
+            this.state.type,
+            this.state.startDate,
+            this.state.endDate,
+            this.onSuccess)
+    }
+    onSuccess() {
+        message.success("Удачно")
+    }
+    componentDidMount() {
+        for (let i = 0; i < this.props.dataCustomers.length; i++) {
+            let val = this.props.dataCustomers[i];
+            this.customers.push(<Option value={val}>{val}</Option>)
+        }
+
+        for (let i = 0; i < this.props.products.length; i++) {
+            let val = this.props.products[i];
+            this.products.push(<Option value={val}>{val}</Option>)
+        }
+    }
+
+    render() {
         return (
             <div style={{paddingLeft:'40px',  width : '40vw'}}>
-                <Form layout={this.props.formLayout}>
-
-                    <Form.Item
-                    label="С кем заключается сделка">
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Имя" />
-                    </Form.Item>
+                <Form layout={"horizontal"}>
+                    <span>Выберите вторго участника сделки</span>
+                    <div></div>
+                    <Select
+                        showSearch
+                        onChange={this.onChangeSecondPlayer}
+                        style={{ width: 200 }}
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {this.customers}
+                    </Select>
                 <Form.Item
                     label="Дата начала и конца">
-                    <RangePicker/>
+                    <RangePicker
+                    onChange={this.onChangeDate}/>
                 </Form.Item>
-                    <div>
-                        <span>Тип продукции  </span>
-                        {/*<Cascader style={{ width : '30vw', marginTop: "8px" }}*/}
-                                  {/*options={options}*/}
-                                  {/*placeholder="Укажите тип продукции" />*/}
-                        <Input
-                            prefix={<Icon type="inbox" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Тип продукции" />
-                    </div>
+                        <span>Укажите тип поставляемой продукции</span>
+                    <div></div>
 
-                <Form.Item
+                    <Select
+                            showSearch
+                            onChange={this.onChangeProductionType}
+                            style={{ width: 200 }}
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                        >
+                            {this.products}
+                        </Select>
+
+                    <Form.Item>
+                        <span>Укажите кол-во киллограм продукции</span>
+                        <div></div>
+                        <InputNumber
+                            min={1}
+                            max={1000}
+                            defaultValue={1}
+                            onChange={this.onChangeWeight}/>
+
+                    </Form.Item>
+
+                    <Form.Item
                     style={{marginTop: "16px" }}>
                     <Button
+                        onClick={this.onClick}
                         type="primary"
                         htmlType="submit">
                         Готово

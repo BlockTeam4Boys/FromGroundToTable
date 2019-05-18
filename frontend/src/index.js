@@ -9,6 +9,7 @@ import {Redirect, Switch} from "react-router";
 import Cookies from "js-cookie";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 ReactDOM.render(
 
@@ -21,13 +22,14 @@ ReactDOM.render(
             <Route path="/login" render={() => (Cookies.get("role") !== "user" ?
                 <LoginPage/> :
                 <Redirect to={"/"}/>)}/>
-            <Route path="/contracts"
+            <Route path="/admin" render={() => (<AdminPage/>)}/>
+            <Route path="/create"
                    render={() => (Cookies.get("role") === "user" ?
-                       <DealListPage/> :
+                       <CreateContractPage/> :
                        <Redirect to={"/login"}/>)}/>
             <Route path="/"
                    render={() => (Cookies.get("role") === "user" ?
-                       <CreateContractPage/> :
+                       <DealListPage/> :
                        <Redirect to={"/login"}/>)}/>
         </Switch>
     </BrowserRouter>,

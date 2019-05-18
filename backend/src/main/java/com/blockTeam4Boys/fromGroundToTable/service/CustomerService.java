@@ -1,21 +1,21 @@
 package com.blockTeam4Boys.fromGroundToTable.service;
 
-import com.blockTeam4Boys.fromGroundToTable.entities.Customer;
+import com.blockTeam4Boys.fromGroundToTable.model.entities.Customer;
 import com.blockTeam4Boys.fromGroundToTable.model.wrappers.CustomerWrapper;
 import com.blockTeam4Boys.fromGroundToTable.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("customerService")
 public class CustomerService implements UserDetailsService {
 
     private CustomerRepository customerRepository;
 
-    @Autowired
     CustomerService(CustomerRepository userRepository) {
         this.customerRepository = userRepository;
     }
@@ -34,6 +34,10 @@ public class CustomerService implements UserDetailsService {
         return customerRepository.saveAndFlush(customer);
     }
 
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
     public Customer getUserByUsername(String username) {
         Customer customer = customerRepository.findByName(username);
         if (customer == null) {
@@ -41,4 +45,5 @@ public class CustomerService implements UserDetailsService {
         }
         return customer;
     }
+
 }

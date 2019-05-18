@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-
+import Cookies from "js-cookie";
 import './AppHeader.css';
 import logo from './../../resources/logo.png';
 import Layout from "antd/es/layout";
@@ -13,15 +13,21 @@ class AppHeader extends Component {
     constructor(props) {
         super(props);
         this.onRelocateToContracts = this.onRelocateToContracts.bind(this);
+        this.onLogout = this.onLogout.bind(this);
         this.onRelocateToMainPage = this.onRelocateToMainPage.bind(this);
     }
 
     onRelocateToContracts() {
-        this.props.history.push("/contracts");
+        this.props.history.push("/");
+    }
+
+    onLogout() {
+        Cookies.remove("role");
+        this.props.history.push("/login");
     }
 
     onRelocateToMainPage() {
-        this.props.history.push("/");
+        this.props.history.push("/create");
     }
 
     render() {
@@ -39,7 +45,7 @@ class AppHeader extends Component {
                     >
                         <SubMenu  style={{display: 'flex', flexFlow: 'row wrap'}}
                                   key="sub1"
-                                  title={<span><Icon type="user" />Василий Петрович</span>}>
+                                  title={<span><Icon type="user" />{Cookies.get("name")}</span>}>
 
                             <Menu.Item
                                 onClick={this.onRelocateToMainPage}
@@ -55,6 +61,7 @@ class AppHeader extends Component {
                                 Мои контракты
                                 </Menu.Item>
                             <Menu.Item
+                                onClick={this.onLogout}
                                 key="4">
                                 <Icon type="close-circle"/>
                                 Выход

@@ -1,6 +1,6 @@
 package com.blockTeam4Boys.fromGroundToTable.model.wrappers;
 
-import com.blockTeam4Boys.fromGroundToTable.entities.Customer;
+import com.blockTeam4Boys.fromGroundToTable.model.entities.Customer;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
