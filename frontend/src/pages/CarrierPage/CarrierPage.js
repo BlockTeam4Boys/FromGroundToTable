@@ -4,6 +4,7 @@ import AllPlaces from "../../components/carrierComponents/AllPlaces/AllPlaces";
 import {Layout} from "antd";
 import CarrierHeader from "../../components/carrierComponents/Header/CarrierHeader";
 import CreatePlace from "../../components/carrierComponents/CreatePlace/CreatePlace";
+import ConfirmDelivery from "../../components/carrierComponents/ConfirmDelivery/ConfirmDelivery";
 const {Content} = Layout;
 
 class CarrierPage extends React.Component {
@@ -16,7 +17,7 @@ class CarrierPage extends React.Component {
                 <Content>
                     <div style={{ display: 'flex', background: '#f9f9f9', paddingTop: 30, minHeight: '88vh', paddingLeft: '5vw' }}>
                         <AllPlaces/>
-                        {/*<ConfirmDelivery/>*/}
+                        <ConfirmDelivery/>
                         <CreatePlace/>
                     </div>
                 </Content>

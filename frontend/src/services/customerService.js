@@ -73,8 +73,8 @@ export function tryRegistration(username, password, inn, role, onSuccessLogin, o
         })
             .then(v => {
                 onSuccessLogin();
-            }).
-        catch(() => {
+            })
+            .catch(() => {
             onFailureRegistration();
         })
 }

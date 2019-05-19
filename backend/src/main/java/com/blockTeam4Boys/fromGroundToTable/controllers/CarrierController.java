@@ -2,6 +2,7 @@ package com.blockTeam4Boys.fromGroundToTable.controllers;
 
 import com.blockTeam4Boys.fromGroundToTable.model.DTOs.PlaceDTO;
 import com.blockTeam4Boys.fromGroundToTable.model.DTOs.ProductDTO;
+import com.blockTeam4Boys.fromGroundToTable.model.DTOs.StockDTO;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Place;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Product;
 import com.blockTeam4Boys.fromGroundToTable.service.CarrierService;
@@ -50,6 +51,18 @@ public class CarrierController {
         );
     }
 
+    @CrossOrigin
+    @RequestMapping(path = "/confirm", method = RequestMethod.POST)
+    public void confirm(@RequestParam("productId") int productId,
+                            @RequestParam("stockId") int stockId) throws Exception {
+        carrierService.confirmDelivery(productId, stockId);
+    }
+
+    @CrossOrigin
+    @RequestMapping(path = "/get-stock", method = RequestMethod.GET)
+    public List<StockDTO> getStock(@RequestParam("productId") int productId) throws Exception {
+       return carrierService.getStock(productId);
+    }
 
     @CrossOrigin
     @RequestMapping(path = "/getMyPlaces", method = RequestMethod.GET)

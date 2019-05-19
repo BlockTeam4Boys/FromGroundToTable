@@ -40,7 +40,7 @@ class AllPlaces extends React.Component {
     render() {
         return (
             <List
-                style = {{width: '60vw'}}
+                style = {{width: '40vw'}}
                 size="small"
                 header={<div>Мои склады</div>}
                 bordered

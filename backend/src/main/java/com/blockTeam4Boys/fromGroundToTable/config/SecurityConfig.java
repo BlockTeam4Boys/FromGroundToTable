@@ -52,6 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/dummyLogin*",
                         "/create-transfer/*",
                         "/me/*",
+                        "/confirm/*",
+                        "/get-stock/*",
                         "/create-place/*",
                         "/getMyPlaces/*",
                         "/consistently-transfer/*",

@@ -1,11 +1,19 @@
 package com.blockTeam4Boys.fromGroundToTable.service;
 
+import com.blockTeam4Boys.fromGroundToTable.ethereum.FoodTrackerService;
+import com.blockTeam4Boys.fromGroundToTable.model.DTOs.CustomerDTO;
+import com.blockTeam4Boys.fromGroundToTable.model.DTOs.PlaceDTO;
+import com.blockTeam4Boys.fromGroundToTable.model.DTOs.StockDTO;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.*;
 import com.blockTeam4Boys.fromGroundToTable.repositories.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,13 +26,16 @@ public class CarrierService {
     private DistrictRepository districtRepository;
     private RegionRepository regionRepository;
     private CustomerRepository customerRepository;
+    private FoodTrackerService foodTrackerService;
+
     public CarrierService(PlaceRepository placeRepository,
                           AddressRepository addressRepository,
                           StreetRepository streetRepository,
                           CityRepository cityRepository,
                           DistrictRepository districtRepository,
                           RegionRepository regionRepository,
-                          CustomerRepository customerRepository) {
+                          CustomerRepository customerRepository,
+                          FoodTrackerService foodTrackerService) {
         this.placeRepository = placeRepository;
         this.addressRepository = addressRepository;
         this.streetRepository = streetRepository;
@@ -32,6 +43,30 @@ public class CarrierService {
         this.districtRepository = districtRepository;
         this.regionRepository = regionRepository;
         this.customerRepository = customerRepository;
+        this.foodTrackerService = foodTrackerService;
+    }
+
+    public void confirmDelivery(int productId, int stockId) throws Exception {
+        foodTrackerService.addStockForProduct(productId, stockId, new Date().toString());
+    }
+
+    public List<StockDTO> getStock(int productId) throws Exception {
+        List<Integer> ids = foodTrackerService.getProductStocksId(productId);
+        List<String> datas = foodTrackerService.getProductStocksData(productId);
+
+        List<StockDTO> stockDTOS = new ArrayList<>();
+
+        ModelMapper modelMapper = new ModelMapper();
+        for (int i = 0; i < ids.size(); i++) {
+            StockDTO stockDTO = new StockDTO();
+            stockDTO.setData(datas.get(i));
+            Place place = placeRepository.findById(Long.valueOf(ids.get(i))).get();
+            stockDTO.setPlace(modelMapper.map(place, PlaceDTO.class));
+
+            stockDTOS.add(stockDTO);
+        }
+
+        return stockDTOS;
     }
 
     public Set<Place> getMyPlaces() {

@@ -40,6 +40,23 @@ export function createPlace(physicalRegion,
     })
 }
 
+export function confirmDelivery(productId, stockId, onSuccess, onReject) {
+    const data = new FormData();
+    data.append("productId", productId);
+    data.append("stockId", stockId);
+
+    fetch("/confirm", {
+        method: "POST",
+        credentials: "include",
+        body: new URLSearchParams(data)
+    })
+        .then(v => {
+            onSuccess();
+        }).catch(() => {
+        onReject()
+    })
+}
+
 export function getMyPlaces(onSuccess) {
     axios.get('/getMyPlaces')
         .then(places => {

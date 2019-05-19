@@ -49,6 +49,8 @@ class CreatePlace extends Component {
 
         return (
             <Form onSubmit={this.handleSubmit} className="create-form">
+                <span>Внести мой склад в систему</span>
+                <div></div>
                 <span>Физический адрес</span>
                 <Form.Item>
                     {getFieldDecorator("physicalRegion", {

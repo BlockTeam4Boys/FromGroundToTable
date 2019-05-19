@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import CarrierPage from "./pages/CarrierPage/CarrierPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 ReactDOM.render(
 
@@ -23,6 +24,8 @@ ReactDOM.render(
 
             <Route path="/admin" render={() => (<AdminPage/>)}/>
 
+            <Route path="/user" render={() => (<UserPage/>)}/>
+
             <Route path="/create"
                    render={() => (Cookies.get("role") === "farmer" ?
                        <CreateContractPage/> :
@@ -32,6 +35,7 @@ ReactDOM.render(
                    render={() => (Cookies.get("role") === "carrier" ?
                        <CarrierPage/> :
                        <Redirect to={"/login"}/>)}/>
+
             <Route path="/"
                    render={() => (Cookies.get("role") === "farmer" ?
                        <DealListPage/> :

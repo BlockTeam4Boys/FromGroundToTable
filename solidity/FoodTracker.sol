@@ -2,34 +2,27 @@ pragma solidity >=0.4.22 <0.6.0;
 
 contract FoodTracker {
     
-    struct Stock {
-        string name;
+    struct Product {
+        uint[] stocks;
+        string[] times;
     }
-    
-    struct Potato {
-        string data;
-        Stock[] stocks;
-    }
-  
-    mapping (uint => Potato) private potatos;
-    
-  function newPotatos(uint id, string memory data) public {
-      potatos[id].data = data;
+
+    mapping (uint => Product) products;
+
+  function addStockForProduct(uint productId, uint stockId, string memory time) public {
+      products[productId].stocks.push(stockId);
+      products[productId].times.push(time);
   }
 
-  function addSeller(uint potatoId, string memory stockName) public {
-      Stock memory stock = Stock(stockName);   
-      potatos[potatoId].stocks.push(stock);
+  function getCountOfStocks(uint productId) public view returns (uint) {
+      return products[productId].stocks.length;
   }
-  
-    function getPotatoStockCount(uint potatoId) public view returns (uint) {
-      return potatos[potatoId].stocks.length;
+
+  function getStockId(uint productId, uint stockNumber) public view returns (uint) {
+      return products[productId].stocks[stockNumber];
   }
-     function getPotatoStockInfo(uint potatoId, uint stockNumber) public view returns (string memory) {
-     return potatos[potatoId].stocks[stockNumber].name;
-  }
-  
-  function getPotatoInfo(uint potatoNumber) public view returns (string memory) {
-      return potatos[potatoNumber].data;
+
+  function getStockTime(uint productId, uint stockNumber) public view returns (string memory) {
+      return products[productId].times[stockNumber];
   }
 }
