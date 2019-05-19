@@ -52,17 +52,19 @@ export function tryLogin(username, password, onSuccessLogin) {
             body: new URLSearchParams(data)
         })
             .then(v => {
+                console.log(v)
                 if (v.url.indexOf("dummyLogin") !== -1) {
                     onSuccessLogin(username);
                 }
             })
 }
-export function tryRegistration(username, password, inn, onSuccessLogin, onFailureRegistration) {
+export function tryRegistration(username, password, inn, role, onSuccessLogin, onFailureRegistration) {
 
         const data = new FormData();
         data.append("username", username);
         data.append("password", password);
         data.append("inn", inn);
+        data.append("role", role);
 
         fetch("/registration", {
             method: "POST",

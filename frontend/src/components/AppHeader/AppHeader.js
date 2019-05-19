@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
 import Cookies from "js-cookie";
-import './AppHeader.css';
 import logo from './../../resources/logo.png';
 import Layout from "antd/es/layout";
 import Menu from "antd/es/menu";

@@ -3,6 +3,9 @@ import {Button, Form, Icon, Input, message} from "antd";
 import "./RegistrationPage.css";
 import {withRouter} from "react-router-dom";
 import {tryRegistration} from "../../services/customerService";
+import { Radio } from 'antd';
+
+const RadioGroup = Radio.Group;
 
 class RegistrationPage extends React.Component {
 
@@ -12,6 +15,16 @@ class RegistrationPage extends React.Component {
         this.onFailureRegistration = this.onFailureRegistration.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    state = {
+        value: 1,
+    };
+
+    onChangeRadion = e => {
+        this.setState({
+            value: e.target.value,
+        });
+    };
 
     onSuccessRegistration() {
         this.props.history.push("/login");
@@ -32,6 +45,7 @@ class RegistrationPage extends React.Component {
                 tryRegistration(values.userName,
                     values.password,
                     values.inn,
+                    this.state.value === 1 ? 'farmer' : 'carrier',
                     this.onSuccessRegistration,
                     this.onFailureRegistration);
             }
@@ -68,6 +82,12 @@ class RegistrationPage extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item>
+                    <RadioGroup onChange={this.onChangeRadion} value={this.state.value}>
+                        <Radio value={1}>Производитель</Radio>
+                        <Radio value={2}>Представитель склада</Radio>
+                    </RadioGroup>
+                </Form.Item>
+                <Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Зарегистрироваться
                     </Button>
@@ -79,6 +99,7 @@ class RegistrationPage extends React.Component {
                         Войти в систему
                     </Button>
                 </Form.Item>
+
             </Form>
         )
     }

@@ -4,7 +4,8 @@ import Icon from "antd/es/icon";
 import {Button, Form, Input, message} from "antd";
 import {createProduct} from "../../../services/adminService";
 
-class CreateProduct extends Component {
+
+class ConfirmDelivery extends Component {
     constructor(props) {
         super(props);
         this.onSuccessRegistration = this.onSuccessRegistration.bind(this);
@@ -56,4 +57,4 @@ class CreateProduct extends Component {
     }
 }
 
-export default (withRouter(Form.create()(CreateProduct)));
+export default (withRouter(Form.create()(ConfirmDelivery)));

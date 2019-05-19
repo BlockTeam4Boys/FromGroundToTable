@@ -4,7 +4,7 @@ import "./LoginPage.css";
 import "antd/dist/antd.css"
 import {withRouter} from "react-router-dom";
 import Cookies from "js-cookie";
-import {tryLogin} from "../../services/customerService";
+import {getMe, tryLogin} from "../../services/customerService";
 
 class LoginPage extends React.Component {
 
@@ -12,12 +12,21 @@ class LoginPage extends React.Component {
         super(props);
         this.onSuccessLogin = this.onSuccessLogin.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onSuccessGetMe = this.onSuccessGetMe.bind(this);
     }
 
+    onSuccessGetMe(customer) {
+        if (customer.data.roles[0].name === 'farmer') {
+            Cookies.set("role", 'farmer', {expires: 30});
+            this.props.history.push("/");
+        } else {
+            Cookies.set("role", 'carrier', {expires: 30});
+            this.props.history.push("/carrier");
+        }
+    }
     onSuccessLogin(name) {
-        Cookies.set("role", "user", {expires: 30});
         Cookies.set("name", name, {expires: 30});
-        this.props.history.push("/");
+        getMe(this.onSuccessGetMe)
     }
 
     redirectToRegistration = () => {

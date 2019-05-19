@@ -5,22 +5,14 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Getter
 @Setter
-public class CustomerDTO {
 
+public class StreetDTO {
     @NotNull
     @NotEmpty
     private String name;
 
-    @NotNull
-    private Set<TransferDTO> transfersFromMe;
-
-    @NotNull
-    private Set<TransferDTO> transfersToMe;
-
-    @NotNull
-    private Set<RoleDTO> roles;
+    private CityDTO city;
 }

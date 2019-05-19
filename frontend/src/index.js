@@ -10,25 +10,30 @@ import Cookies from "js-cookie";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
+import CarrierPage from "./pages/CarrierPage/CarrierPage";
 
 ReactDOM.render(
 
     <BrowserRouter>
         <Switch>
             <Route path="/registration"
-                   render={() => (Cookies.get("role") !== "user" ?
-                       <RegistrationPage/> :
-                       <Redirect to={"/"}/>)}/>
-            <Route path="/login" render={() => (Cookies.get("role") !== "user" ?
-                <LoginPage/> :
-                <Redirect to={"/"}/>)}/>
+                   render={() => <RegistrationPage/>}/>
+
+            <Route path="/login" render={() => <LoginPage/>}/>
+
             <Route path="/admin" render={() => (<AdminPage/>)}/>
+
             <Route path="/create"
-                   render={() => (Cookies.get("role") === "user" ?
+                   render={() => (Cookies.get("role") === "farmer" ?
                        <CreateContractPage/> :
                        <Redirect to={"/login"}/>)}/>
+
+            <Route path="/carrier"
+                   render={() => (Cookies.get("role") === "carrier" ?
+                       <CarrierPage/> :
+                       <Redirect to={"/login"}/>)}/>
             <Route path="/"
-                   render={() => (Cookies.get("role") === "user" ?
+                   render={() => (Cookies.get("role") === "farmer" ?
                        <DealListPage/> :
                        <Redirect to={"/login"}/>)}/>
         </Switch>

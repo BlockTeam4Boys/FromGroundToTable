@@ -10,8 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class CustomerController {
@@ -28,9 +26,10 @@ public class CustomerController {
     @CrossOrigin
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public void registration(@RequestParam("username") String name,
-                         @RequestParam("password") String password,
-                         @RequestParam("inn") String inn) {
-        customerService.createUser(name, password, inn);
+                             @RequestParam("password") String password,
+                             @RequestParam("inn") String inn,
+                             @RequestParam("role") String role) {
+        customerService.createUser(name, password, inn, role);
     }
 
     @CrossOrigin

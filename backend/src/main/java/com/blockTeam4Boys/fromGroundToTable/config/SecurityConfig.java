@@ -49,9 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/manifest.json",
                         "/static/**",
                         "/admin/**",
-                        "/dummyLogin",
+                        "/dummyLogin*",
                         "/create-transfer/*",
                         "/me/*",
+                        "/create-place/*",
+                        "/getMyPlaces/*",
                         "/consistently-transfer/*",
                         "/registration").permitAll()
                 .antMatchers("/**").authenticated();
