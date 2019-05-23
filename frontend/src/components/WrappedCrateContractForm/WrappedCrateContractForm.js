@@ -71,7 +71,7 @@ class CrateContractForm extends React.Component {
         return (
             <div style={{paddingLeft:'40px',  width : '40vw'}}>
                 <Form layout={"horizontal"}>
-                    <span>Выберите вторго участника сделки</span>
+                    <span>Выберите второго участника сделки</span>
                     <div></div>
                     <Select
                         showSearch
@@ -105,7 +105,7 @@ class CrateContractForm extends React.Component {
                         </Select>
 
                     <Form.Item>
-                        <span>Укажите кол-во киллограм продукции</span>
+                        <span>Укажите количество килограмм продукции</span>
                         <div></div>
                         <InputNumber
                             min={1}
