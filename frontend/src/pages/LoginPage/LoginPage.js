@@ -1,10 +1,12 @@
 import React from "react";
-import {Button, Form, Icon, Input} from "antd";
+import {Button, Form, Icon, Input, Layout} from "antd";
 import "./LoginPage.css";
 import "antd/dist/antd.css"
 import {withRouter} from "react-router-dom";
 import Cookies from "js-cookie";
 import {getMe, tryLogin} from "../../services/customerService";
+import LoginPageHeader from "../../components/LoginPageHeader/LoginPageHeader";
+const {Content} = Layout;
 
 class LoginPage extends React.Component {
 
@@ -16,6 +18,7 @@ class LoginPage extends React.Component {
     }
 
     onSuccessGetMe(customer) {
+        Cookies.set("name", customer.data.name, {expires: 30});
         if (customer.data.roles[0].name === 'farmer') {
             Cookies.set("role", 'farmer', {expires: 30});
             this.props.history.push("/");
@@ -24,8 +27,7 @@ class LoginPage extends React.Component {
             this.props.history.push("/carrier");
         }
     }
-    onSuccessLogin(name) {
-        Cookies.set("name", name, {expires: 30});
+    onSuccessLogin() {
         getMe(this.onSuccessGetMe)
     }
 
@@ -37,7 +39,7 @@ class LoginPage extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                tryLogin(values.userName, values.password, this.onSuccessLogin);
+                tryLogin(values.inn, values.password, this.onSuccessLogin);
             }
         });
     };
@@ -46,20 +48,27 @@ class LoginPage extends React.Component {
         const {getFieldDecorator} = this.props.form;
 
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
-                <Form.Item>
-                    {getFieldDecorator("userName", {
-                        rules: [{required: true, message: "Please input your username!"}],
+            <Layout style={{ minHeight: '100vh' }}>
+                <LoginPageHeader/>
+                <Content>
+                    <div style={{ display: 'flex', background: '#f9f9f9', paddingTop: 30, minHeight: '88vh', paddingLeft: '5vw' }}>
+                        <Form onSubmit={this.handleSubmit} className="login-form">
+                            <Form.Item>
+                            <p style={{ marginBottom: "20px", fontSize: '28px', fontWeight: "700" }}>Вход в систему</p>
+                            </Form.Item>
+                                <Form.Item>
+                    {getFieldDecorator("inn", {
+                        rules: [{required: true, message: "Пожалуйста, введите свой ИНН"}],
                     })(
-                        <Input prefix={<Icon type="user" style={{color: "rgba(0,0,0,.25)"}}/>} placeholder="Username"/>
+                        <Input prefix={<Icon type="audit" style={{color: "rgba(0,0,0,.25)"}}/>} placeholder="ИНН"/>
                     )}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator("password", {
-                        rules: [{required: true, message: "Please input your Password!"}],
+                        rules: [{required: true, message: "Пожалуйста, введите свой пароль"}],
                     })(
                         <Input prefix={<Icon type="lock" style={{color: "rgba(0,0,0,.25)"}}/>} type="password"
-                               placeholder="Password"/>
+                               placeholder="Пароль"/>
                     )}
                 </Form.Item>
                 <Form.Item>
@@ -67,14 +76,17 @@ class LoginPage extends React.Component {
                         Войти в систему
                     </Button>
                 </Form.Item>
-                <Form.Item>
-                    <Button
-                    onClick={this.redirectToRegistration}
-                        type="primary" className="login-form-button">
-                        Зарегистрироваться
-                    </Button>
-                </Form.Item>
+                            <Form.Item >
+                                <div style={{ width: "300px", display: "flex"}}>
+                                    <p style={{margin: "auto 0 auto auto"}}>Еще нет аккаунта?</p>
+                                    <Button style={{margin: "auto 0"}} onClick={this.redirectToRegistration} type="link">Зарегистрироваться</Button>
+                                </div>
+                            </Form.Item>
             </Form>
+                    </div>
+
+                </Content>
+            </Layout>
         )
     }
 }

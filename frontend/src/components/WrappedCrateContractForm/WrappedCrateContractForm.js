@@ -18,20 +18,32 @@ class CrateContractForm extends React.Component {
             type: '',
             startDate: '',
             endDate: '',
+            unitType: 'кг',
         };
         this.onChangeWeight = this.onChangeWeight.bind(this);
         this.onChangeSecondPlayer = this.onChangeSecondPlayer.bind(this);
         this.onChangeProductionType = this.onChangeProductionType.bind(this);
+        this.onChangeUnitType = this.onChangeUnitType.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onClick = this.onClick.bind(this);
 
     }
+
+    units = [
+        <Option value={'кг'}>кг</Option>,
+        <Option value={'литры'}>литры</Option>,
+        <Option value={'штук'}>штук</Option>,
+        <Option value={'десяток'}>десяток</Option>,
+    ];
+
     customers = [];
     products = [];
 
     onChangeWeight(value) {
         this.setState({weight : value});
-        console.log(this.state.weight)
+    }
+    onChangeUnitType(value) {
+        this.setState({unitType : value});
     }
     onChangeProductionType(value) {
         this.setState({type : value});
@@ -50,6 +62,7 @@ class CrateContractForm extends React.Component {
             this.state.type,
             this.state.startDate,
             this.state.endDate,
+            this.state.unitType,
             this.onSuccess)
     }
     onSuccess() {
@@ -71,8 +84,10 @@ class CrateContractForm extends React.Component {
         return (
             <div style={{paddingLeft:'40px',  width : '40vw'}}>
                 <Form layout={"horizontal"}>
+                    <Form.Item>
+
                     <span>Выберите второго участника сделки</span>
-                    <div></div>
+                    <div/>
                     <Select
                         showSearch
                         onChange={this.onChangeSecondPlayer}
@@ -84,13 +99,16 @@ class CrateContractForm extends React.Component {
                     >
                         {this.customers}
                     </Select>
-                <Form.Item
-                    label="Дата начала и конца">
-                    <RangePicker
-                    onChange={this.onChangeDate}/>
+                    </Form.Item>
+
+                        <Form.Item>
+                    <span>Дата начала и конца</span>
+                    <RangePicker onChange={this.onChangeDate}/>
                 </Form.Item>
-                        <span>Укажите тип поставляемой продукции</span>
-                    <div></div>
+                    <Form.Item>
+
+                    <span>Укажите тип поставляемой продукции</span>
+                    <div/>
 
                     <Select
                             showSearch
@@ -103,21 +121,34 @@ class CrateContractForm extends React.Component {
                         >
                             {this.products}
                         </Select>
+                    </Form.Item>
 
                     <Form.Item>
-                        <span>Укажите количество килограмм продукции</span>
-                        <div></div>
+                        <span>Укажите количество продукции</span>
+                        <div/>
                         <InputNumber
                             min={1}
                             max={1000}
                             defaultValue={1}
                             onChange={this.onChangeWeight}/>
 
+                        <Select
+                            showSearch
+                            onChange={this.onChangeUnitType}
+                            optionFilterProp="children"
+                            defaultValue={'кг'}
+                            style={{ paddingLeft:"15px",  width: 110 }}
+                            filterOption={(input, option) =>
+                                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                        >
+                            {this.units}
+                        </Select>
                     </Form.Item>
 
-                    <Form.Item
-                    style={{marginTop: "16px" }}>
-                    <Button
+                    <Form.Item>
+
+                        <Button
                         onClick={this.onClick}
                         type="primary"
                         htmlType="submit">

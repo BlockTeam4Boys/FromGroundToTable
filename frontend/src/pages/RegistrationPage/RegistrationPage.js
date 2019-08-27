@@ -1,9 +1,11 @@
 import React from "react";
-import {Button, Form, Icon, Input, message} from "antd";
+import {Button, Form, Icon, Input, Layout, message} from "antd";
 import "./RegistrationPage.css";
 import {withRouter} from "react-router-dom";
 import {tryRegistration} from "../../services/customerService";
 import { Radio } from 'antd';
+import LoginPageHeader from "../../components/LoginPageHeader/LoginPageHeader";
+const {Content} = Layout;
 
 const RadioGroup = Radio.Group;
 
@@ -56,18 +58,25 @@ class RegistrationPage extends React.Component {
         const {getFieldDecorator} = this.props.form;
 
         return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Layout style={{ minHeight: '100vh' }}>
+                <LoginPageHeader/>
+                <Content>
+                    <div style={{ display: 'flex', background: '#f9f9f9', paddingTop: 30, minHeight: '88vh', paddingLeft: '5vw' }}>
+
+                    <Form onSubmit={this.handleSubmit} className="login-form">
+                            <p style={{ marginBottom: "20px", fontSize: '28px', fontWeight: "700" }}>Регистрация</p>
+
                 <Form.Item>
                     {getFieldDecorator("userName", {
-                        rules: [{required: true, message: "Пожалуйтса, введите свое юзернейм!"}],
+                        rules: [{required: true, message: "Пожалуйтса, введите имя пользователя"}],
                     })(
                         <Input prefix={<Icon type="user" style={{color: "rgba(0,0,0,.25)"}}/>}
-                               placeholder="юзернейм"/>
+                               placeholder="Имя пользователя"/>
                     )}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator("password", {
-                        rules: [{required: true, message: "Пожалуйтса, введите свой пароль!"}],
+                        rules: [{required: true, message: "Пожалуйтса, введите пароль"}],
                     })(
                         <Input prefix={<Icon type="lock" style={{color: "rgba(0,0,0,.25)"}}/>} type="password"
                                placeholder="Пароль"/>
@@ -75,9 +84,9 @@ class RegistrationPage extends React.Component {
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator("inn", {
-                        rules: [{required: true, message: "Пожалуйтса, введите свой ИНН!"}],
+                        rules: [{required: true, message: "Пожалуйтса, введите свой ИНН"}],
                     })(
-                        <Input prefix={<Icon type="lock" style={{color: "rgba(0,0,0,.25)"}}/>} type="password"
+                        <Input prefix={<Icon type="audit" style={{color: "rgba(0,0,0,.25)"}}/>}
                                placeholder="ИНН"/>
                     )}
                 </Form.Item>
@@ -92,15 +101,17 @@ class RegistrationPage extends React.Component {
                         Зарегистрироваться
                     </Button>
                 </Form.Item>
-                <Form.Item>
-                    <Button
-                        onClick={this.redirectToLogin}
-                        type="primary" className="login-form-button">
-                        Войти в систему
-                    </Button>
-                </Form.Item>
+                        <Form.Item >
+                            <div style={{ width: "300px", display: "flex"}}>
+                                <p style={{margin: "auto 0 auto auto"}}>Уже зарегистрировались?</p>
+                                <Button style={{margin: "auto auto auto 0"}} onClick={this.redirectToLogin} type="link">Войти</Button>
+                            </div>
+                        </Form.Item>
 
             </Form>
+                    </div>
+                </Content>
+            </Layout>
         )
     }
 }

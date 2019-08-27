@@ -25,6 +25,7 @@ class App2 extends Component {
         this.setState({dataCustomers : this.state.dataCustomers,
         products: this.state.products});
     }
+
     onSuccessProduct(products) {
         let arr = [];
         for (let i = 0; i < products.data.length; i++) {

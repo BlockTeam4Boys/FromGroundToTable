@@ -30,7 +30,7 @@ class CarrierHeader extends Component {
 
                 <Menu
                     mode="inline"
-                    style={{ height: '100%', width: 230, marginLeft: 'auto', zIndex: '10'}}
+                    style={{ height: '100%', borderRadius: '5px',  width: 230, marginLeft: 'auto', zIndex: '10'}}
                 >
                     <SubMenu  style={{display: 'flex', flexFlow: 'row wrap'}}
                               key="sub1"

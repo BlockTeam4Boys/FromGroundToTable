@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function createTransfers(name, weight, type, startDate, endDate, onSuccess) {
+export function createTransfers(name, weight, type, startDate, endDate, unitType, onSuccess) {
 
     const data = new FormData();
     data.append("name", name);
@@ -8,12 +8,8 @@ export function createTransfers(name, weight, type, startDate, endDate, onSucces
     data.append("type", type);
     data.append("startDate", startDate);
     data.append("endDate", endDate);
+    data.append("unitType", unitType);
 
-    console.log(name)
-    console.log(weight)
-    console.log(type)
-    console.log(startDate)
-    console.log(endDate)
     fetch("/create-transfer", {
         method: "POST",
         credentials: "include",
@@ -40,10 +36,10 @@ export function consistentlyTransfer(id) {
     })
 }
 
-export function tryLogin(username, password, onSuccessLogin) {
+export function tryLogin(inn, password, onSuccessLogin) {
 
         const data = new FormData();
-        data.append("username", username);
+        data.append("inn", inn);
         data.append("password", password);
 
         fetch("/dummyLogin", {
@@ -52,9 +48,8 @@ export function tryLogin(username, password, onSuccessLogin) {
             body: new URLSearchParams(data)
         })
             .then(v => {
-                console.log(v)
                 if (v.url.indexOf("dummyLogin") !== -1) {
-                    onSuccessLogin(username);
+                    onSuccessLogin();
                 }
             })
 }

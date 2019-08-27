@@ -50,7 +50,9 @@ class UserPage extends React.Component {
         const {getFieldDecorator} = this.props.form;
 
         return (
-            <div>
+            <div style={{
+                display: 'flex'
+            }} >
             <Form onSubmit={this.handleSubmit} className="get-form">
                 <Form.Item>
                     {getFieldDecorator("id", {
@@ -69,7 +71,10 @@ class UserPage extends React.Component {
 
             </Form>
             <List
-        style = {{width: '60vw'}}
+        style = {{width: '50vw',
+            margin: '40px',
+            marginLeft: '10vw'
+        }}
         size="small"
         header={<div>Маршрут товара</div>}
         bordered
