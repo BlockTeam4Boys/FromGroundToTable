@@ -35,7 +35,8 @@ public class CarrierService {
                           DistrictRepository districtRepository,
                           RegionRepository regionRepository,
                           CustomerRepository customerRepository,
-                          FoodTrackerService foodTrackerService) {
+                          FoodTrackerService foodTrackerService
+    ) {
         this.placeRepository = placeRepository;
         this.addressRepository = addressRepository;
         this.streetRepository = streetRepository;

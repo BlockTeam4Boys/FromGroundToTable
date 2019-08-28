@@ -1,7 +1,9 @@
 package com.blockTeam4Boys.fromGroundToTable.controllers;
 
 import com.blockTeam4Boys.fromGroundToTable.model.DTOs.CustomerDTO;
+import com.blockTeam4Boys.fromGroundToTable.model.converters.requestParamToEntityConverters.UnitTypeToStringConverter;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Customer;
+import com.blockTeam4Boys.fromGroundToTable.model.entities.UnitType;
 import com.blockTeam4Boys.fromGroundToTable.service.CustomerService;
 import com.blockTeam4Boys.fromGroundToTable.service.TransferService;
 import org.modelmapper.ModelMapper;
@@ -38,6 +40,7 @@ public class CustomerController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         ModelMapper modelMapper = new ModelMapper();
+        modelMapper.addConverter(new UnitTypeToStringConverter());
         Customer customer = customerService.getUserByUsername(currentPrincipalName);
 
         return modelMapper.map(customer, CustomerDTO.class);
@@ -48,9 +51,11 @@ public class CustomerController {
     public void createTransfers(@RequestParam("name") String name,
                          @RequestParam("weight") String weight,
                          @RequestParam("type") String type,
+                                @RequestParam("unitType") UnitType unitType,
                          @RequestParam("startDate") String startDate,
-                         @RequestParam("endDate") String endDate) throws ParseException {
-        transferService.createTransfer(name, type, Integer.parseInt(weight), startDate, endDate);
+                         @RequestParam("endDate") String endDate
+                                ) throws ParseException {
+        transferService.createTransfer(name, type, Double.parseDouble(weight), unitType, startDate, endDate);
     }
 
     @CrossOrigin

@@ -1,10 +1,8 @@
 package com.blockTeam4Boys.fromGroundToTable.controllers;
 
 import com.blockTeam4Boys.fromGroundToTable.model.DTOs.PlaceDTO;
-import com.blockTeam4Boys.fromGroundToTable.model.DTOs.ProductDTO;
 import com.blockTeam4Boys.fromGroundToTable.model.DTOs.StockDTO;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Place;
-import com.blockTeam4Boys.fromGroundToTable.model.entities.Product;
 import com.blockTeam4Boys.fromGroundToTable.service.CarrierService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;

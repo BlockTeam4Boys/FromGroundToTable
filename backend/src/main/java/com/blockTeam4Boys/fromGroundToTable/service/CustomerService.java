@@ -1,6 +1,5 @@
 package com.blockTeam4Boys.fromGroundToTable.service;
 
-import com.blockTeam4Boys.fromGroundToTable.model.converter.RoleNameConverter;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Customer;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.Role;
 import com.blockTeam4Boys.fromGroundToTable.model.entities.RoleName;
@@ -28,8 +27,11 @@ public class CustomerService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        return new CustomerWrapper(getUserByUsername(username));
+    // in this case we need to use inn as username
+    // because UserDetailsService has only loadUserByUsername method
+    // but we wont login by inn
+    public UserDetails loadUserByUsername(String inn) {
+        return new CustomerWrapper(getUserByInn(inn));
     }
 
     public Customer createUser(String username, String password, String inn, String role) {
@@ -48,10 +50,18 @@ public class CustomerService implements UserDetailsService {
         return customerRepository.findAll();
     }
 
-    public Customer getUserByUsername(String username) {
-        Customer customer = customerRepository.findByName(username);
+    public Customer getUserByInn(String inn) {
+        Customer customer = customerRepository.findByInn(inn);
         if (customer == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(inn);
+        }
+        return customer;
+    }
+
+    public Customer getUserByUsername(String name) {
+        Customer customer = customerRepository.findByName(name);
+        if (customer == null) {
+            throw new UsernameNotFoundException(name);
         }
         return customer;
     }

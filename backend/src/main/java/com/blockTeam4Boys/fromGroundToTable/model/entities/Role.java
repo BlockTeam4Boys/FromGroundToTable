@@ -1,6 +1,6 @@
 package com.blockTeam4Boys.fromGroundToTable.model.entities;
 
-import com.blockTeam4Boys.fromGroundToTable.model.converter.RoleNameConverter;
+import com.blockTeam4Boys.fromGroundToTable.model.converters.daoToEntityConverters.RoleNameConverter;
 import lombok.Getter;
 import lombok.Setter;
 

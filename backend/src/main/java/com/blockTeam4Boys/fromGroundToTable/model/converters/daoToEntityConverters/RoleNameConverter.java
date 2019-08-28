@@ -1,4 +1,4 @@
-package com.blockTeam4Boys.fromGroundToTable.model.converter;
+package com.blockTeam4Boys.fromGroundToTable.model.converters.daoToEntityConverters;
 
 import com.blockTeam4Boys.fromGroundToTable.model.entities.RoleName;
 

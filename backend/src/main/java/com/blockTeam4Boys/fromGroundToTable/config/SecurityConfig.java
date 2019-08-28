@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/login*",
+                .antMatchers(
+                        "/login*",
                         "/manifest.json",
                         "/static/**",
                         "/admin/**",
@@ -62,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .formLogin()
+                .usernameParameter("inn")
                 .loginPage("/login")
                 .loginProcessingUrl("/dummyLogin")
                 .successForwardUrl("/")

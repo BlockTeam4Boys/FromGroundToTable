@@ -1,5 +1,7 @@
 package com.blockTeam4Boys.fromGroundToTable.model.entities;
 
+import com.blockTeam4Boys.fromGroundToTable.model.converters.daoToEntityConverters.RoleNameConverter;
+import com.blockTeam4Boys.fromGroundToTable.model.converters.daoToEntityConverters.UnitTypeConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +38,11 @@ public class Transfer {
     private Date endDate;
 
     @Column(name = "weight")
-    private int weight;
+    private double weight;
+
+    @Column(name = "unittype")
+    @Convert(converter = UnitTypeConverter.class)
+    private UnitType unitType;
 
     @Column(name = "consistently")
     private boolean consistently;

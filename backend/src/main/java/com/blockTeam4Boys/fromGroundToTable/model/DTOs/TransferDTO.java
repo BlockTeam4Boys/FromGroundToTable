@@ -1,5 +1,6 @@
 package com.blockTeam4Boys.fromGroundToTable.model.DTOs;
 
+import com.blockTeam4Boys.fromGroundToTable.model.entities.UnitType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,11 @@ public class TransferDTO {
 
     @NotNull
     @NotEmpty
-    private int weight;
+    private double weight;
+
+    @NotNull
+    @NotEmpty
+    private String unitType;
 
     @NotNull
     @NotEmpty
