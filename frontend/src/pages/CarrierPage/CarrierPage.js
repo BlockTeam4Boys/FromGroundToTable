@@ -16,7 +16,9 @@ class CarrierPage extends React.Component {
                 <Content>
                     <div style={{ display: 'flex', background: '#f9f9f9', paddingTop: 30, minHeight: '88vh', paddingLeft: '5vw' }}>
                         <AllPlaces/>
+                        <div style={{margin: '20px'}} />
                         <ConfirmDelivery/>
+                        <div style={{margin: '20px'}} />
                         <CreatePlace/>
                     </div>
                 </Content>

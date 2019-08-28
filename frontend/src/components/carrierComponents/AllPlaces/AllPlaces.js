@@ -18,7 +18,6 @@ class AllPlaces extends React.Component {
     }
 
     onSuccess(places) {
-        console.log(places)
 
         let arr = [];
         for (let i = 0; i < places.data.length; i++) {
